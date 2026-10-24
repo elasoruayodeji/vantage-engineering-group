@@ -45,7 +45,7 @@ export default function Home() {
               </Link>
               <Link
                 to="/services"
-                className="border border-ivory/30 text-ivory px-8 py-4 font-semibold rounded hover:bg-ivory/10 transition-colors text-center flex items-center justify-center gap-2"
+                className="border border-ivory/30 text-ivory px-8 py-4 font-semibold rounded hover:bg-ivory/10 transition-colors flex items-center justify-center gap-2"
               >
                 Explore Our Capabilities <ArrowRight size={18} />
               </Link>
