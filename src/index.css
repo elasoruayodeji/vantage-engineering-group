@@ -23,7 +23,6 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -92,9 +91,9 @@ input, textarea, select {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Smooth scroll */
+/* Scroll behavior - disabled globally to allow instant scroll-to-top on route changes */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 /* Enhanced card hover effects */

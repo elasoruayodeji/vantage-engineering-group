@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import { SHORT_NAME, CONTACT } from '../data/content';
 import { ScrollProgress, BackToTop } from './ScrollProgress';
+import ScrollToTop from './ScrollToTop';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -230,14 +231,9 @@ export function Footer() {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const location = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
-
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollToTop />
       <ScrollProgress />
       <Navbar />
       <main className="flex-1 pt-16 lg:pt-20">
