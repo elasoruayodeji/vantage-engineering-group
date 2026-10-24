@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Section, SectionHeading, Breadcrumbs } from '../components/UI';
+import { StatsSection } from '../components/AnimatedCounter';
 import { team, principles } from '../data/content';
 
 export default function About() {
@@ -123,6 +124,28 @@ export default function About() {
         </div>
       </Section>
 
+      {/* Stats */}
+      <Section dark className="relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `linear-gradient(rgba(183, 213, 229, 0.3) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(183, 213, 229, 0.3) 1px, transparent 1px)`,
+            backgroundSize: '60px 60px'
+          }} />
+        </div>
+        <div className="relative">
+          <StatsSection
+            stats={[
+              { value: 10, suffix: '+', label: 'Years of Experience' },
+              { value: 150, suffix: '+', label: 'Projects Delivered' },
+              { value: 6, label: 'Engineering Disciplines' },
+              { value: 5, label: 'Service Regions' },
+            ]}
+            dark
+          />
+        </div>
+      </Section>
+
       {/* Leadership */}
       <Section>
         <SectionHeading eyebrow="Leadership" title="Our Team" description="The senior professionals guiding VANTAGE Engineering's technical and operational direction." />
@@ -134,14 +157,14 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="bg-white border border-ivory-dark p-6 rounded-sm"
+              className="bg-white border border-ivory-dark p-6 rounded-sm card-hover group"
             >
-              <div className="w-16 h-16 bg-steel/20 rounded-full flex items-center justify-center mb-4">
+              <div className="w-16 h-16 bg-steel/20 rounded-full flex items-center justify-center mb-4 group-hover:bg-steel/40 transition-colors duration-300">
                 <span className="font-heading text-xl font-bold text-steel-dark">
                   {member.name.split(' ').map(n => n[0]).slice(0, 2).join('')}
                 </span>
               </div>
-              <h3 className="font-heading font-semibold text-graphite">{member.name}</h3>
+              <h3 className="font-heading font-semibold text-graphite group-hover:text-steel-dark transition-colors duration-300">{member.name}</h3>
               <p className="text-steel-dark text-sm font-medium mb-3">{member.title}</p>
               <p className="text-structural text-sm leading-relaxed">{member.bio}</p>
             </motion.div>

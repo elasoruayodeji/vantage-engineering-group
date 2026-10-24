@@ -44,27 +44,30 @@ export function ServiceCard({ service, index = 0 }: { service: Service; index?: 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="card-hover"
     >
       <Link
         to={`/services/${service.slug}`}
-        className="group block bg-white border border-ivory-dark rounded-sm overflow-hidden hover:shadow-lg transition-shadow h-full"
+        className="group block bg-white border border-ivory-dark rounded-sm overflow-hidden h-full relative"
       >
-        <div className="aspect-[16/10] overflow-hidden">
+        <div className="aspect-[16/10] overflow-hidden relative">
           <img
             src={service.image}
             alt={service.imageAlt}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
             loading="lazy"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-graphite/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
-        <div className="p-6">
-          <h3 className="font-heading text-xl font-semibold text-graphite mb-2 group-hover:text-steel-dark transition-colors">
+        <div className="p-6 relative">
+          <div className="absolute top-0 left-0 w-0 h-0.5 bg-steel group-hover:w-full transition-all duration-500" />
+          <h3 className="font-heading text-xl font-semibold text-graphite mb-2 group-hover:text-steel-dark transition-colors duration-300">
             {service.shortTitle}
           </h3>
           <p className="text-structural text-sm leading-relaxed line-clamp-3">
             {service.description}
           </p>
-          <span className="inline-flex items-center gap-1 text-sm font-medium text-steel-dark mt-4 group-hover:gap-2 transition-all">
+          <span className="inline-flex items-center gap-1 text-sm font-medium text-steel-dark mt-4 group-hover:gap-3 transition-all duration-300">
             Learn more <ArrowRight size={14} />
           </span>
         </div>
@@ -91,23 +94,24 @@ export function ProjectCard({ project, index = 0, featured = false }: { project:
           <img
             src={project.image}
             alt={project.imageAlt}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-graphite/90 via-graphite/30 to-transparent group-hover:via-graphite/40 transition-all duration-500" />
+          <div className="absolute inset-0 border-2 border-steel/0 group-hover:border-steel/30 rounded-sm transition-all duration-500" />
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
             <div className="flex items-center gap-2 mb-2">
               <span className="font-mono text-xs text-steel uppercase tracking-wider">{project.category}</span>
               <span className="text-ivory/30">·</span>
               <span className="text-xs text-ivory/60">{project.location}</span>
             </div>
-            <h3 className="font-heading text-xl md:text-2xl font-bold text-ivory mb-2">
+            <h3 className="font-heading text-xl md:text-2xl font-bold text-ivory mb-2 group-hover:text-steel transition-colors duration-300">
               {project.title}
             </h3>
             {!featured && (
-              <p className="text-ivory/70 text-sm line-clamp-2">{project.scope}</p>
+              <p className="text-ivory/70 text-sm line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">{project.scope}</p>
             )}
-            <span className="inline-flex items-center gap-1 text-sm font-medium text-steel mt-3 group-hover:gap-2 transition-all">
+            <span className="inline-flex items-center gap-1 text-sm font-medium text-steel mt-3 group-hover:gap-3 transition-all duration-300">
               View project <ArrowRight size={14} />
             </span>
           </div>
@@ -125,30 +129,33 @@ export function ArticleCard({ article, index = 0 }: { article: Article; index?: 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="card-hover"
     >
       <Link
         to={`/insights/${article.slug}`}
-        className="group block bg-white border border-ivory-dark rounded-sm overflow-hidden hover:shadow-lg transition-shadow h-full"
+        className="group block bg-white border border-ivory-dark rounded-sm overflow-hidden h-full relative"
       >
-        <div className="aspect-[16/9] overflow-hidden">
+        <div className="aspect-[16/9] overflow-hidden relative">
           <img
             src={article.image}
             alt={article.imageAlt}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
             loading="lazy"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-graphite/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
-        <div className="p-6">
+        <div className="p-6 relative">
+          <div className="absolute top-0 left-0 w-0 h-0.5 bg-steel group-hover:w-full transition-all duration-500" />
           <div className="flex items-center gap-3 text-xs text-structural mb-3">
             <time dateTime={article.date}>{new Date(article.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</time>
             <span>·</span>
             <span>{article.readTime}</span>
           </div>
-          <h3 className="font-heading text-lg font-semibold text-graphite mb-2 group-hover:text-steel-dark transition-colors line-clamp-2">
+          <h3 className="font-heading text-lg font-semibold text-graphite mb-2 group-hover:text-steel-dark transition-colors duration-300 line-clamp-2">
             {article.title}
           </h3>
           <p className="text-structural text-sm line-clamp-2">{article.excerpt}</p>
-          <span className="inline-flex items-center gap-1 text-sm font-medium text-steel-dark mt-4 group-hover:gap-2 transition-all">
+          <span className="inline-flex items-center gap-1 text-sm font-medium text-steel-dark mt-4 group-hover:gap-3 transition-all duration-300">
             Read article <ArrowRight size={14} />
           </span>
         </div>
@@ -180,20 +187,38 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
 // CTA Section
 export function CTASection({ title, description, primaryText, primaryTo, secondaryText, secondaryTo }: { title: string; description: string; primaryText: string; primaryTo: string; secondaryText?: string; secondaryTo?: string }) {
   return (
-    <Section dark>
-      <div className="max-w-3xl mx-auto text-center">
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-ivory mb-4">{title}</h2>
-        <p className="text-ivory/70 text-lg mb-8">{description}</p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link to={primaryTo} className="bg-steel text-graphite px-8 py-3.5 font-semibold rounded hover:bg-steel-dark transition-colors">
-            {primaryText}
-          </Link>
-          {secondaryText && secondaryTo && (
-            <Link to={secondaryTo} className="text-ivory/80 hover:text-ivory font-medium transition-colors flex items-center gap-1">
-              {secondaryText} <ArrowRight size={16} />
+    <Section dark className="relative overflow-hidden">
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(183, 213, 229, 0.3) 0%, transparent 50%),
+                           radial-gradient(circle at 75% 75%, rgba(183, 213, 229, 0.3) 0%, transparent 50%)`,
+        }} />
+      </div>
+      <div className="relative max-w-3xl mx-auto text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">{title}</h2>
+          <p className="text-ivory/70 text-lg mb-8">{description}</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link 
+              to={primaryTo} 
+              className="bg-steel text-graphite px-8 py-4 font-semibold rounded hover:bg-steel-dark transition-all hover:scale-105 shadow-lg hover:shadow-2xl"
+            >
+              {primaryText}
             </Link>
-          )}
-        </div>
+            {secondaryText && secondaryTo && (
+              <Link to={secondaryTo} className="text-ivory/80 hover:text-ivory font-medium transition-colors flex items-center gap-2 group">
+                {secondaryText} 
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            )}
+          </div>
+        </motion.div>
       </div>
     </Section>
   );

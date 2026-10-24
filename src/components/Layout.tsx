@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import { SHORT_NAME, CONTACT } from '../data/content';
+import { ScrollProgress, BackToTop } from './ScrollProgress';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -81,31 +83,51 @@ export function Navbar() {
         </div>
 
         {/* Mobile Nav */}
-        {isOpen && (
-          <div className="lg:hidden bg-graphite border-t border-white/10 pb-6">
-            <div className="flex flex-col gap-1 pt-4">
-              {navLinks.map(link => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`px-4 py-3 text-sm font-medium rounded transition-colors ${
-                    location.pathname.startsWith(link.to)
-                      ? 'text-steel bg-white/5'
-                      : 'text-ivory/80 hover:text-ivory hover:bg-white/5'
-                  }`}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden bg-graphite border-t border-white/10 overflow-hidden"
+            >
+              <div className="flex flex-col gap-1 pt-4 pb-6">
+                {navLinks.map((link, i) => (
+                  <motion.div
+                    key={link.to}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: i * 0.05 }}
+                  >
+                    <Link
+                      to={link.to}
+                      className={`px-4 py-3 text-sm font-medium rounded transition-colors block ${
+                        location.pathname.startsWith(link.to)
+                          ? 'text-steel bg-white/5'
+                          : 'text-ivory/80 hover:text-ivory hover:bg-white/5'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: navLinks.length * 0.05 }}
                 >
-                  {link.label}
-                </Link>
-              ))}
-              <Link
-                to="/contact"
-                className="mx-4 mt-4 bg-steel text-graphite px-5 py-3 text-sm font-semibold rounded text-center hover:bg-steel-dark transition-colors"
-              >
-                Discuss a Project
-              </Link>
-            </div>
-          </div>
-        )}
+                  <Link
+                    to="/contact"
+                    className="mx-4 mt-4 bg-steel text-graphite px-5 py-3 text-sm font-semibold rounded text-center hover:bg-steel-dark transition-colors block"
+                  >
+                    Discuss a Project
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </header>
   );
@@ -136,12 +158,12 @@ export function Footer() {
             <p className="text-sm leading-relaxed mb-4">
               Integrated engineering, industrial systems and infrastructure solutions designed for lasting performance.
             </p>
-            <div className="flex items-center gap-2 text-sm">
-              <Phone size={14} className="text-steel" />
+            <div className="flex items-center gap-2 text-sm hover:text-steel transition-colors cursor-pointer">
+              <Phone size={14} className="text-steel flex-shrink-0" />
               <span>{CONTACT.phone}</span>
             </div>
-            <div className="flex items-center gap-2 text-sm mt-2">
-              <Mail size={14} className="text-steel" />
+            <div className="flex items-center gap-2 text-sm mt-2 hover:text-steel transition-colors cursor-pointer">
+              <Mail size={14} className="text-steel flex-shrink-0" />
               <span>{CONTACT.email}</span>
             </div>
           </div>
@@ -150,12 +172,20 @@ export function Footer() {
           <div>
             <h3 className="font-heading font-semibold text-ivory text-sm uppercase tracking-wider mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><Link to="/services/civil-structural-engineering" className="text-sm hover:text-steel transition-colors">Civil & Structural</Link></li>
-              <li><Link to="/services/mep-engineering" className="text-sm hover:text-steel transition-colors">MEP Engineering</Link></li>
-              <li><Link to="/services/industrial-engineering" className="text-sm hover:text-steel transition-colors">Industrial Engineering</Link></li>
-              <li><Link to="/services/infrastructure-water-systems" className="text-sm hover:text-steel transition-colors">Infrastructure & Water</Link></li>
-              <li><Link to="/services/energy-sustainability" className="text-sm hover:text-steel transition-colors">Energy & Sustainability</Link></li>
-              <li><Link to="/services/project-management" className="text-sm hover:text-steel transition-colors">Project Management</Link></li>
+              {['Civil & Structural', 'MEP Engineering', 'Industrial Engineering', 'Infrastructure & Water', 'Energy & Sustainability', 'Project Management'].map((label, i) => {
+                const slugs = ['civil-structural-engineering', 'mep-engineering', 'industrial-engineering', 'infrastructure-water-systems', 'energy-sustainability', 'project-management'];
+                return (
+                  <li key={label}>
+                    <Link 
+                      to={`/services/${slugs[i]}`} 
+                      className="text-sm hover:text-steel transition-colors inline-flex items-center gap-1 group"
+                    >
+                      <span className="w-0 h-px bg-steel group-hover:w-2 transition-all duration-300" />
+                      {label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
@@ -208,11 +238,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollProgress />
       <Navbar />
       <main className="flex-1 pt-16 lg:pt-20">
         {children}
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }

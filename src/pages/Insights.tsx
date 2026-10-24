@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock, Calendar } from 'lucide-react';
 import { Section, SectionHeading, ArticleCard, Breadcrumbs, CTASection } from '../components/UI';
+import { ReadingProgress } from '../components/ReadingProgress';
 import { articles, services } from '../data/content';
 
 export function InsightsList() {
@@ -53,6 +54,7 @@ export function InsightDetail() {
 
   return (
     <>
+      <ReadingProgress />
       {/* Hero */}
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0 opacity-20">

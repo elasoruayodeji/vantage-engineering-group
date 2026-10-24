@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Shield, Target, CheckCircle, Clock } from 'lucide-react';
 import { Section, SectionHeading, ServiceCard, ProjectCard, ArticleCard, CTASection } from '../components/UI';
+import { StatsSection } from '../components/AnimatedCounter';
+import { MagneticButton } from '../components/InteractiveElements';
 import { services, projects, articles, methodology } from '../data/content';
 
 export default function Home() {
@@ -11,7 +13,12 @@ export default function Home() {
     <>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
+        <motion.div 
+          className="absolute inset-0"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        >
           <img
             src="https://images.unsplash.com/photo-1764449321624-913ca52646c6?auto=format&fit=crop&w=1920&q=80"
             alt="Construction site with cranes and bridge infrastructure"
@@ -19,7 +26,15 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-graphite/75" />
           <div className="absolute inset-0 bg-gradient-to-r from-graphite/80 via-graphite/50 to-transparent" />
-        </div>
+          {/* Animated grid pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `linear-gradient(rgba(183, 213, 229, 0.3) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(183, 213, 229, 0.3) 1px, transparent 1px)`,
+              backgroundSize: '50px 50px'
+            }} />
+          </div>
+        </motion.div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -37,24 +52,40 @@ export default function Home() {
               Integrated engineering, industrial systems and infrastructure solutions designed for lasting performance.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                to="/contact"
-                className="bg-steel text-graphite px-8 py-4 font-semibold rounded hover:bg-steel-dark transition-colors text-center"
-              >
-                Discuss Your Project
-              </Link>
-              <Link
-                to="/services"
-                className="border border-ivory/30 text-ivory px-8 py-4 font-semibold rounded hover:bg-ivory/10 transition-colors flex items-center justify-center gap-2"
-              >
-                Explore Our Capabilities <ArrowRight size={18} />
-              </Link>
+              <MagneticButton>
+                <Link
+                  to="/contact"
+                  className="bg-steel text-graphite px-8 py-4 font-semibold rounded hover:bg-steel-dark transition-colors text-center inline-block"
+                >
+                  Discuss Your Project
+                </Link>
+              </MagneticButton>
+              <MagneticButton>
+                <Link
+                  to="/services"
+                  className="border border-ivory/30 text-ivory px-8 py-4 font-semibold rounded hover:bg-ivory/10 transition-colors flex items-center justify-center gap-2"
+                >
+                  Explore Our Capabilities <ArrowRight size={18} />
+                </Link>
+              </MagneticButton>
             </div>
           </motion.div>
         </div>
         {/* Bottom gradient */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-ivory to-transparent" />
       </section>
+
+      {/* Stats Section */}
+      <Section className="bg-white border-b border-ivory-dark">
+        <StatsSection
+          stats={[
+            { value: 10, suffix: '+', label: 'Years of Experience' },
+            { value: 150, suffix: '+', label: 'Projects Delivered' },
+            { value: 6, label: 'Engineering Disciplines' },
+            { value: 95, suffix: '%', label: 'Client Retention' },
+          ]}
+        />
+      </Section>
 
       {/* Company Introduction */}
       <Section>
