@@ -1,0 +1,229 @@
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ArrowRight, Shield, Target, CheckCircle, Clock } from 'lucide-react';
+import { Section, SectionHeading, ServiceCard, ProjectCard, ArticleCard, CTASection } from '../components/UI';
+import { services, projects, articles, methodology } from '../data/content';
+
+export default function Home() {
+  const featuredProjects = projects.slice(0, 3);
+
+  return (
+    <>
+      {/* Hero Section */}
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1764449321624-913ca52646c6?auto=format&fit=crop&w=1920&q=80"
+            alt="Construction site with cranes and bridge infrastructure"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-graphite/75" />
+          <div className="absolute inset-0 bg-gradient-to-r from-graphite/80 via-graphite/50 to-transparent" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl"
+          >
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-steel mb-4 block">
+              Multidisciplinary Engineering
+            </span>
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-ivory leading-[1.1] mb-6">
+              Engineering the Infrastructure of Tomorrow
+            </h1>
+            <p className="text-lg md:text-xl text-ivory/70 max-w-2xl mb-8 leading-relaxed">
+              Integrated engineering, industrial systems and infrastructure solutions designed for lasting performance.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                to="/contact"
+                className="bg-steel text-graphite px-8 py-4 font-semibold rounded hover:bg-steel-dark transition-colors text-center"
+              >
+                Discuss Your Project
+              </Link>
+              <Link
+                to="/services"
+                className="border border-ivory/30 text-ivory px-8 py-4 font-semibold rounded hover:bg-ivory/10 transition-colors text-center flex items-center justify-center gap-2"
+              >
+                Explore Our Capabilities <ArrowRight size={18} />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+        {/* Bottom gradient */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-ivory to-transparent" />
+      </section>
+
+      {/* Company Introduction */}
+      <Section>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <SectionHeading
+              eyebrow="Who We Are"
+              title="Integrated Engineering Under One Roof"
+              description="VANTAGE Engineering brings together civil, structural, mechanical, electrical, industrial, and infrastructure disciplines. We coordinate the full engineering scope so clients work with one team from feasibility through handover."
+            />
+            <p className="text-structural leading-relaxed mb-6">
+              Founded in 2014, we identified a recurring challenge: clients coordinating independent consultants, contractors, and suppliers without integrated technical oversight. Our model addresses this by providing coordinated engineering delivery across disciplines.
+            </p>
+            <p className="text-structural leading-relaxed mb-8">
+              We serve commercial developers, manufacturers, logistics operators, and institutional clients across Lagos, Abuja, Port Harcourt, and selected West African markets.
+            </p>
+            <Link to="/about" className="inline-flex items-center gap-2 text-steel-dark font-medium hover:gap-3 transition-all">
+              Learn about our approach <ArrowRight size={16} />
+            </Link>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative"
+          >
+            <div className="aspect-[4/5] rounded-sm overflow-hidden">
+              <img
+                src="https://images.pexels.com/photos/8961070/pexels-photo-8961070.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Engineers discussing a construction project in PPE"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="absolute -bottom-6 -left-6 bg-graphite text-ivory p-6 rounded-sm shadow-xl max-w-[200px]">
+              <span className="font-heading text-3xl font-bold text-steel">10+</span>
+              <p className="text-sm text-ivory/70 mt-1">Years of multidisciplinary engineering delivery</p>
+            </div>
+          </motion.div>
+        </div>
+      </Section>
+
+      {/* Capabilities */}
+      <Section className="bg-white">
+        <SectionHeading
+          eyebrow="Our Capabilities"
+          title="Six Engineering Disciplines, One Coordinated Approach"
+          description="From structural design to energy systems, we deliver integrated engineering services tailored to Nigerian and West African conditions."
+          center
+        />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service, i) => (
+            <ServiceCard key={service.id} service={service} index={i} />
+          ))}
+        </div>
+      </Section>
+
+      {/* Selected Projects */}
+      <Section dark>
+        <SectionHeading
+          eyebrow="Selected Projects"
+          title="Delivering Complex Engineering Outcomes"
+          description="Illustrative project case studies demonstrating our integrated approach across commercial, industrial, energy, and infrastructure sectors."
+          light
+        />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featuredProjects.map((project, i) => (
+            <ProjectCard key={project.id} project={project} index={i} />
+          ))}
+        </div>
+        <div className="text-center mt-12">
+          <Link to="/projects" className="inline-flex items-center gap-2 text-steel font-medium hover:gap-3 transition-all">
+            View all projects <ArrowRight size={16} />
+          </Link>
+        </div>
+      </Section>
+
+      {/* Methodology */}
+      <Section>
+        <SectionHeading
+          eyebrow="Our Process"
+          title="Seven Stages of Engineering Delivery"
+          description="Every project follows a structured methodology from initial discovery through handover and support."
+          center
+        />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4">
+          {methodology.map((step, i) => (
+            <motion.div
+              key={step.stage}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="relative bg-white border border-ivory-dark p-5 rounded-sm"
+            >
+              <span className="font-mono text-xs text-steel-dark font-medium">0{step.stage}</span>
+              <h3 className="font-heading font-semibold text-graphite text-sm mt-2 mb-2">{step.title}</h3>
+              <p className="text-structural text-xs leading-relaxed">{step.description}</p>
+            </motion.div>
+          ))}
+        </div>
+        <div className="text-center mt-10">
+          <Link to="/our-process" className="inline-flex items-center gap-2 text-steel-dark font-medium hover:gap-3 transition-all">
+            Explore our full methodology <ArrowRight size={16} />
+          </Link>
+        </div>
+      </Section>
+
+      {/* Engineering Principles */}
+      <Section className="bg-white">
+        <SectionHeading
+          eyebrow="Engineering Principles"
+          title="Built on Technical Rigour"
+          center
+        />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {[
+            { icon: Shield, title: 'Safety & Accountability', desc: 'Safety planning, risk assessment, and clear responsibility central to every project.' },
+            { icon: Target, title: 'Technical Integrity', desc: 'Recommendations supported by engineering analysis, standards, and professional review.' },
+            { icon: CheckCircle, title: 'Quality Assurance', desc: 'Documented quality control, inspection procedures, and verification at every stage.' },
+            { icon: Clock, title: 'Lifecycle Performance', desc: 'Designed for operational life, maintainability, and long-term value.' },
+          ].map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              className="text-center"
+            >
+              <div className="w-12 h-12 bg-steel/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <item.icon size={24} className="text-steel-dark" />
+              </div>
+              <h3 className="font-heading font-semibold text-graphite mb-2">{item.title}</h3>
+              <p className="text-structural text-sm leading-relaxed">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Insights */}
+      <Section>
+        <SectionHeading
+          eyebrow="Insights"
+          title="Engineering Knowledge"
+          description="Technical articles on power reliability, maintenance planning, and stormwater management."
+        />
+        <div className="grid md:grid-cols-3 gap-6">
+          {articles.map((article, i) => (
+            <ArticleCard key={article.id} article={article} index={i} />
+          ))}
+        </div>
+      </Section>
+
+      {/* CTA */}
+      <CTASection
+        title="Ready to Discuss Your Project?"
+        description="Tell us about your engineering requirements. We'll review your brief and respond within one business day."
+        primaryText="Start a Conversation"
+        primaryTo="/contact"
+        secondaryText="Explore our services"
+        secondaryTo="/services"
+      />
+    </>
+  );
+}
