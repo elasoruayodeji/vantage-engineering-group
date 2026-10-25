@@ -1,10 +1,17 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Section, Breadcrumbs } from '../components/UI';
+import SEO from '../components/SEO';
 
 export function Privacy() {
   return (
     <>
+      <SEO 
+        title="Privacy Policy"
+        description="Read VANTAGE Engineering Group's privacy policy. Learn how we collect, use, and protect your personal data."
+        canonical="/privacy"
+        noindex
+      />
       <section className="py-16 md:py-20 bg-graphite">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Privacy Policy' }]} />
@@ -50,6 +57,12 @@ export function Privacy() {
 export function Terms() {
   return (
     <>
+      <SEO 
+        title="Terms of Use"
+        description="Read VANTAGE Engineering Group's terms of use. Understand the conditions for using our website and services."
+        canonical="/terms"
+        noindex
+      />
       <section className="py-16 md:py-20 bg-graphite">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Terms of Use' }]} />
@@ -88,22 +101,29 @@ export function Terms() {
 
 export function NotFound() {
   return (
-    <Section className="min-h-[60vh] flex items-center">
-      <div className="max-w-lg mx-auto text-center">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <span className="font-heading text-8xl font-bold text-ivory-dark">404</span>
-          <h1 className="font-heading text-2xl font-bold text-graphite mt-4 mb-3">Page Not Found</h1>
-          <p className="text-structural mb-8">The page you're looking for doesn't exist or has been moved.</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/" className="bg-graphite text-ivory px-6 py-3 font-semibold rounded-sm hover:bg-graphite-light transition-colors">
-              Go Home
-            </Link>
-            <Link to="/services" className="text-steel-dark font-medium hover:underline">
-              View Services
-            </Link>
-          </div>
-        </motion.div>
-      </div>
-    </Section>
+    <>
+      <SEO 
+        title="404 - Page Not Found"
+        description="The page you're looking for doesn't exist. Return to VANTAGE Engineering Group's homepage to explore our engineering services."
+        noindex
+      />
+      <Section className="min-h-[60vh] flex items-center">
+        <div className="max-w-lg mx-auto text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            <span className="font-heading text-8xl font-bold text-ivory-dark">404</span>
+            <h1 className="font-heading text-2xl font-bold text-graphite mt-4 mb-3">Page Not Found</h1>
+            <p className="text-structural mb-8">The page you're looking for doesn't exist or has been moved.</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link to="/" className="bg-graphite text-ivory px-6 py-3 font-semibold rounded-sm hover:bg-graphite-light transition-colors">
+                Go Home
+              </Link>
+              <Link to="/services" className="text-steel-dark font-medium hover:underline">
+                View Services
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </Section>
+    </>
   );
 }

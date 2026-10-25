@@ -4,6 +4,7 @@ import { ArrowRight, Shield, Target, CheckCircle, Clock } from 'lucide-react';
 import { Section, SectionHeading, ServiceCard, ProjectCard, ArticleCard, CTASection } from '../components/UI';
 import { StatsSection } from '../components/AnimatedCounter';
 import { MagneticButton } from '../components/InteractiveElements';
+import SEO, { organizationSchema } from '../components/SEO';
 import { services, projects, articles, methodology } from '../data/content';
 
 export default function Home() {
@@ -11,6 +12,25 @@ export default function Home() {
 
   return (
     <>
+      <SEO 
+        title="Home"
+        description="VANTAGE Engineering Group delivers integrated civil, structural, MEP, industrial, energy, and infrastructure engineering solutions across West Africa. Discover our expertise."
+        canonical="/"
+        jsonLd={[
+          organizationSchema,
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'VANTAGE Engineering Group',
+            url: 'https://vantageengineering.example',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: 'https://vantageengineering.example/?s={search_term_string}',
+              'query-input': 'required name=search_term_string'
+            }
+          }
+        ]}
+      />
       {/* Hero Section - Billion Dollar Consultancy Style */}
       <section className="relative min-h-[calc(100vh-5rem)] flex items-center overflow-hidden bg-graphite">
         {/* Hero Background Image */}

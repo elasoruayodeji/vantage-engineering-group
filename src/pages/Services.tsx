@@ -2,11 +2,22 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check } from 'lucide-react';
 import { Section, SectionHeading, ServiceCard, Breadcrumbs, CTASection } from '../components/UI';
+import SEO, { createBreadcrumbSchema } from '../components/SEO';
 import { services } from '../data/content';
 
 export function ServicesOverview() {
   return (
     <>
+      <SEO 
+        title="Engineering Services"
+        description="Explore VANTAGE Engineering's comprehensive services: Civil & Structural, MEP, Industrial, Infrastructure & Water, Energy & Sustainability, and Project Management."
+        canonical="/services"
+        image="https://images.pexels.com/photos/35454187/pexels-photo-35454187/free-photo-of-industrial-facility-with-solar-panel-rooftop.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        jsonLd={createBreadcrumbSchema([
+          { name: 'Home', url: '/' },
+          { name: 'Services', url: '/services' }
+        ])}
+      />
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -72,6 +83,7 @@ export function ServiceDetail() {
   if (!service) {
     return (
       <Section>
+        <SEO noindex />
         <div className="text-center py-20">
           <h1 className="font-heading text-2xl font-bold text-graphite mb-4">Service Not Found</h1>
           <Link to="/services" className="text-steel-dark hover:underline">View all services</Link>
@@ -84,6 +96,44 @@ export function ServiceDetail() {
 
   return (
     <>
+      <SEO 
+        title={service.title}
+        description={service.description}
+        canonical={`/services/${service.slug}`}
+        image={service.image}
+        jsonLd={[
+          createBreadcrumbSchema([
+            { name: 'Home', url: '/' },
+            { name: 'Services', url: '/services' },
+            { name: service.shortTitle, url: `/services/${service.slug}` }
+          ]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: service.title,
+            description: service.description,
+            provider: {
+              '@type': 'EngineeringBusiness',
+              name: 'VANTAGE Engineering Group Limited'
+            },
+            areaServed: {
+              '@type': 'Place',
+              name: 'West Africa'
+            },
+            hasOfferCatalog: {
+              '@type': 'OfferCatalog',
+              name: `${service.shortTitle} Capabilities`,
+              itemListElement: service.capabilities.map(cap => ({
+                '@type': 'Offer',
+                itemOffered: {
+                  '@type': 'Service',
+                  name: cap
+                }
+              }))
+            }
+          }
+        ]}
+      />
       {/* Hero */}
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0">

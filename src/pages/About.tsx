@@ -1,11 +1,22 @@
 import { motion } from 'framer-motion';
 import { Section, SectionHeading, Breadcrumbs } from '../components/UI';
 import { StatsSection } from '../components/AnimatedCounter';
+import SEO, { createBreadcrumbSchema } from '../components/SEO';
 import { team, principles } from '../data/content';
 
 export default function About() {
   return (
     <>
+      <SEO 
+        title="About Us"
+        description="Learn about VANTAGE Engineering Group - our story, mission, vision, values, and leadership team. Discover how we deliver integrated engineering solutions across West Africa."
+        canonical="/about"
+        image="https://images.pexels.com/photos/8961070/pexels-photo-8961070.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        jsonLd={createBreadcrumbSchema([
+          { name: 'Home', url: '/' },
+          { name: 'About Us', url: '/about' }
+        ])}
+      />
       {/* Hero */}
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0">

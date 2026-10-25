@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Section, Breadcrumbs } from '../components/UI';
+import SEO, { createBreadcrumbSchema } from '../components/SEO';
 import { CONTACT, services } from '../data/content';
 
 export default function Contact() {
@@ -46,6 +47,24 @@ export default function Contact() {
 
   return (
     <>
+      <SEO 
+        title="Contact Us"
+        description="Get in touch with VANTAGE Engineering Group. Discuss your engineering project requirements with our team in Lagos, Nigeria."
+        canonical="/contact"
+        image="https://images.pexels.com/photos/20430714/pexels-photo-20430714/free-photo-of-exterior-of-a-modern-office-building.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        jsonLd={[
+          createBreadcrumbSchema([
+            { name: 'Home', url: '/' },
+            { name: 'Contact', url: '/contact' }
+          ]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'ContactPage',
+            name: 'Contact VANTAGE Engineering Group',
+            url: 'https://vantageengineering.example/contact'
+          }
+        ]}
+      />
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0">
           <img
