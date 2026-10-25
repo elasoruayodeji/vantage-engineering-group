@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://vantageengineering.example/sitemap.xml
+
+# Note: This is a fictional demonstration website.
+# The domain vantageengineering.example uses the reserved .example TLD.

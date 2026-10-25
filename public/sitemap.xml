@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://vantageengineering.example/</loc><priority>1.0</priority></url>
+  <url><loc>https://vantageengineering.example/about</loc><priority>0.8</priority></url>
+  <url><loc>https://vantageengineering.example/services</loc><priority>0.9</priority></url>
+  <url><loc>https://vantageengineering.example/services/civil-structural-engineering</loc><priority>0.7</priority></url>
+  <url><loc>https://vantageengineering.example/services/mep-engineering</loc><priority>0.7</priority></url>
+  <url><loc>https://vantageengineering.example/services/industrial-engineering</loc><priority>0.7</priority></url>
+  <url><loc>https://vantageengineering.example/services/infrastructure-water-systems</loc><priority>0.7</priority></url>
+  <url><loc>https://vantageengineering.example/services/energy-sustainability</loc><priority>0.7</priority></url>
+  <url><loc>https://vantageengineering.example/services/project-management</loc><priority>0.7</priority></url>
+  <url><loc>https://vantageengineering.example/projects</loc><priority>0.8</priority></url>
+  <url><loc>https://vantageengineering.example/projects/meridian-commercial-tower</loc><priority>0.6</priority></url>
+  <url><loc>https://vantageengineering.example/projects/northgate-logistics-hub</loc><priority>0.6</priority></url>
+  <url><loc>https://vantageengineering.example/projects/crestline-food-processing</loc><priority>0.6</priority></url>
+  <url><loc>https://vantageengineering.example/projects/solstice-energy-upgrade</loc><priority>0.6</priority></url>
+  <url><loc>https://vantageengineering.example/projects/eastbank-drainage-scheme</loc><priority>0.6</priority></url>
+  <url><loc>https://vantageengineering.example/projects/haven-residential-development</loc><priority>0.6</priority></url>
+  <url><loc>https://vantageengineering.example/our-process</loc><priority>0.7</priority></url>
+  <url><loc>https://vantageengineering.example/insights</loc><priority>0.7</priority></url>
+  <url><loc>https://vantageengineering.example/insights/designing-commercial-buildings-reliable-power</loc><priority>0.6</priority></url>
+  <url><loc>https://vantageengineering.example/insights/preventive-maintenance-planning-industrial-facilities</loc><priority>0.6</priority></url>
+  <url><loc>https://vantageengineering.example/insights/stormwater-management-urban-developments</loc><priority>0.6</priority></url>
+  <url><loc>https://vantageengineering.example/careers</loc><priority>0.6</priority></url>
+  <url><loc>https://vantageengineering.example/contact</loc><priority>0.8</priority></url>
+  <url><loc>https://vantageengineering.example/privacy</loc><priority>0.3</priority></url>
+  <url><loc>https://vantageengineering.example/terms</loc><priority>0.3</priority></url>
+</urlset>
