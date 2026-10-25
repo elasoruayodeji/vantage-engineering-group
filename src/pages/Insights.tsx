@@ -9,6 +9,21 @@ export function InsightsList() {
   return (
     <>
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.pexels.com/photos/12157172/pexels-photo-12157172.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            alt="Electrical substation and power infrastructure"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-graphite/75" />
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite/80 via-graphite/60 to-graphite-light/70" />
+          <div className="absolute inset-0 opacity-[0.03]" style={{
+            backgroundImage: `linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(212, 175, 55, 0.5) 1px, transparent 1px)`,
+            backgroundSize: '80px 80px'
+          }} />
+          <div className="absolute top-1/3 right-1/3 w-[500px] h-[500px] bg-steel/5 rounded-full blur-[100px]" />
+        </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Insights' }]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -57,10 +72,11 @@ export function InsightDetail() {
       <ReadingProgress />
       {/* Hero */}
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <img src={article.image} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        <div className="absolute inset-0">
+          <img src={article.image} alt={article.imageAlt} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-graphite/70" />
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite/80 via-graphite/50 to-graphite-light/70" />
         </div>
-        <div className="absolute inset-0 bg-graphite/70" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Insights', to: '/insights' }, { label: article.title }]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">

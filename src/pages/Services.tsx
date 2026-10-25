@@ -9,7 +9,13 @@ export function ServicesOverview() {
     <>
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-graphite via-graphite-light to-graphite" />
+          <img
+            src="https://images.pexels.com/photos/35454187/pexels-photo-35454187/free-photo-of-industrial-facility-with-solar-panel-rooftop.jpeg?auto=compress&cs=tinysrgb&w=1800"
+            alt="Industrial facility with solar panels"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-graphite/75" />
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite/80 via-graphite/60 to-graphite-light/70" />
           <div className="absolute inset-0 opacity-[0.03]" style={{
             backgroundImage: `linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px),
                              linear-gradient(90deg, rgba(212, 175, 55, 0.5) 1px, transparent 1px)`,
@@ -80,10 +86,11 @@ export function ServiceDetail() {
     <>
       {/* Hero */}
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <img src={service.image} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        <div className="absolute inset-0">
+          <img src={service.image} alt={service.imageAlt} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-graphite/70" />
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite/80 via-graphite/50 to-graphite-light/70" />
         </div>
-        <div className="absolute inset-0 bg-graphite/60" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Services', to: '/services' }, { label: service.shortTitle }]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>

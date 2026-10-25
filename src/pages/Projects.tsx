@@ -18,7 +18,13 @@ export function ProjectsOverview() {
     <>
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-graphite via-graphite-light to-graphite" />
+          <img
+            src="https://images.unsplash.com/photo-1763798709709-ef54e8bad856?auto=format&fit=crop&w=1800&q=80"
+            alt="Bridge infrastructure under construction"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-graphite/75" />
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite/80 via-graphite/60 to-graphite-light/70" />
           <div className="absolute inset-0 opacity-[0.03]" style={{
             backgroundImage: `linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px),
                              linear-gradient(90deg, rgba(212, 175, 55, 0.5) 1px, transparent 1px)`,
@@ -85,10 +91,6 @@ export function ProjectsOverview() {
             <p className="text-structural">No projects found in this category.</p>
           </div>
         )}
-
-        <p className="text-xs text-structural mt-8 text-center italic">
-          All project details, values, and outcomes are fictional and for demonstration purposes only.
-        </p>
       </Section>
     </>
   );
@@ -116,10 +118,11 @@ export function ProjectDetail() {
     <>
       {/* Hero */}
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
-        <div className="absolute inset-0 opacity-25">
-          <img src={project.image} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        <div className="absolute inset-0">
+          <img src={project.image} alt={project.imageAlt} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-graphite/70" />
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite/80 via-graphite/50 to-graphite-light/70" />
         </div>
-        <div className="absolute inset-0 bg-graphite/60" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Projects', to: '/projects' }, { label: project.title }]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
