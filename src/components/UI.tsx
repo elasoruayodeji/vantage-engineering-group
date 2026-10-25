@@ -188,12 +188,15 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
 export function CTASection({ title, description, primaryText, primaryTo, secondaryText, secondaryTo }: { title: string; description: string; primaryText: string; primaryTo: string; secondaryText?: string; secondaryTo?: string }) {
   return (
     <Section dark className="relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(183, 213, 229, 0.3) 0%, transparent 50%),
-                           radial-gradient(circle at 75% 75%, rgba(183, 213, 229, 0.3) 0%, transparent 50%)`,
+      {/* Sophisticated background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-graphite via-graphite-light to-graphite" />
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px),
+                           linear-gradient(90deg, rgba(212, 175, 55, 0.5) 1px, transparent 1px)`,
+          backgroundSize: '80px 80px'
         }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-steel/5 rounded-full blur-[120px]" />
       </div>
       <div className="relative max-w-3xl mx-auto text-center">
         <motion.div
@@ -202,17 +205,17 @@ export function CTASection({ title, description, primaryText, primaryTo, seconda
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">{title}</h2>
-          <p className="text-ivory/70 text-lg mb-8">{description}</p>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4 leading-tight tracking-tight">{title}</h2>
+          <p className="text-ivory/70 text-lg mb-8 leading-relaxed">{description}</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link 
               to={primaryTo} 
-              className="bg-steel text-graphite px-8 py-4 font-semibold rounded hover:bg-steel-dark transition-all hover:scale-105 shadow-lg hover:shadow-2xl"
+              className="bg-steel text-graphite px-10 py-5 font-semibold rounded-sm hover:bg-steel-dark transition-all hover:scale-105 shadow-lg hover:shadow-2xl"
             >
               {primaryText}
             </Link>
             {secondaryText && secondaryTo && (
-              <Link to={secondaryTo} className="text-ivory/80 hover:text-ivory font-medium transition-colors flex items-center gap-2 group">
+              <Link to={secondaryTo} className="text-ivory/80 hover:text-steel font-medium transition-colors flex items-center gap-2 group">
                 {secondaryText} 
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>

@@ -39,8 +39,8 @@ export function Navbar() {
           <Link to="/" className="flex items-center gap-2 group" aria-label="VANTAGE Engineering Group - Home">
             <div className="w-8 h-8 relative">
               <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
-                <path d="M4 6L16 28L28 6" stroke="#B7D5E5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M8 6L16 22L24 6" stroke="#F3F2ED" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
+                <path d="M4 6L16 28L28 6" stroke="#D4AF37" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M8 6L16 22L24 6" stroke="#F8F6F3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
               </svg>
             </div>
             <div className="flex flex-col">
@@ -152,7 +152,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <svg viewBox="0 0 32 32" fill="none" className="w-7 h-7">
-                <path d="M4 6L16 28L28 6" stroke="#B7D5E5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M4 6L16 28L28 6" stroke="#D4AF37" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span className="font-heading font-bold text-ivory text-lg">VANTAGE</span>
             </div>

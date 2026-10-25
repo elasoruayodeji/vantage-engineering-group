@@ -11,68 +11,114 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <motion.div 
-          className="absolute inset-0"
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-        >
-          <img
-            src="https://images.unsplash.com/photo-1764449321624-913ca52646c6?auto=format&fit=crop&w=1920&q=80"
-            alt="Construction site with cranes and bridge infrastructure"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-graphite/75" />
-          <div className="absolute inset-0 bg-gradient-to-r from-graphite/80 via-graphite/50 to-transparent" />
-          {/* Animated grid pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `linear-gradient(rgba(183, 213, 229, 0.3) 1px, transparent 1px),
-                               linear-gradient(90deg, rgba(183, 213, 229, 0.3) 1px, transparent 1px)`,
-              backgroundSize: '50px 50px'
-            }} />
-          </div>
-        </motion.div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl"
-          >
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-steel mb-4 block">
-              Multidisciplinary Engineering
-            </span>
-            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-ivory leading-[1.1] mb-6">
-              Engineering the Infrastructure of Tomorrow
-            </h1>
-            <p className="text-lg md:text-xl text-ivory/70 max-w-2xl mb-8 leading-relaxed">
-              Integrated engineering, industrial systems and infrastructure solutions designed for lasting performance.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <MagneticButton>
-                <Link
-                  to="/contact"
-                  className="bg-steel text-graphite px-8 py-4 font-semibold rounded hover:bg-steel-dark transition-colors text-center inline-block"
-                >
-                  Discuss Your Project
-                </Link>
-              </MagneticButton>
-              <MagneticButton>
-                <Link
-                  to="/services"
-                  className="border border-ivory/30 text-ivory px-8 py-4 font-semibold rounded hover:bg-ivory/10 transition-colors flex items-center justify-center gap-2"
-                >
-                  Explore Our Capabilities <ArrowRight size={18} />
-                </Link>
-              </MagneticButton>
-            </div>
-          </motion.div>
+      {/* Hero Section - Billion Dollar Consultancy Style */}
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-graphite">
+        {/* Sophisticated Background */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite via-graphite-light to-graphite" />
+          {/* Subtle geometric pattern */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{
+            backgroundImage: `linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(212, 175, 55, 0.5) 1px, transparent 1px)`,
+            backgroundSize: '80px 80px'
+          }} />
+          {/* Radial glow */}
+          <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-steel/5 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-steel/3 rounded-full blur-[100px]" />
         </div>
-        {/* Bottom gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-ivory to-transparent" />
+
+        {/* Content */}
+        <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-24 lg:py-32 w-full">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Left Column - Main Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="lg:col-span-7"
+            >
+              {/* Eyebrow */}
+              <div className="flex items-center gap-3 mb-8">
+                <div className="h-px w-12 bg-steel" />
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-steel font-medium">
+                  Multidisciplinary Engineering
+                </span>
+              </div>
+
+              {/* Main Heading */}
+              <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold text-ivory leading-[1.05] mb-8 tracking-tight">
+                Engineering the
+                <br />
+                <span className="text-steel">Infrastructure</span>
+                <br />
+                of Tomorrow
+              </h1>
+
+              {/* Subheading */}
+              <p className="text-xl md:text-2xl text-ivory/80 max-w-2xl mb-12 leading-relaxed font-light">
+                Integrated engineering, industrial systems and infrastructure solutions designed for lasting performance across West Africa.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-5">
+                <MagneticButton>
+                  <Link
+                    to="/contact"
+                    className="group bg-steel text-graphite px-10 py-5 font-semibold rounded-sm hover:bg-steel-dark transition-all duration-300 text-center inline-flex items-center justify-center gap-3 shadow-lg hover:shadow-2xl hover:scale-105"
+                  >
+                    Discuss Your Project
+                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </MagneticButton>
+                <MagneticButton>
+                  <Link
+                    to="/services"
+                    className="group border-2 border-ivory/30 text-ivory px-10 py-5 font-semibold rounded-sm hover:border-steel hover:bg-steel/5 transition-all duration-300 flex items-center justify-center gap-3"
+                  >
+                    Explore Capabilities
+                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </MagneticButton>
+              </div>
+            </motion.div>
+
+            {/* Right Column - Stats/Visual Element */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              className="lg:col-span-5 hidden lg:block"
+            >
+              <div className="relative">
+                {/* Decorative frame */}
+                <div className="absolute -inset-4 border border-steel/20 rounded-sm" />
+                <div className="absolute -inset-8 border border-steel/10 rounded-sm" />
+                
+                {/* Stats card */}
+                <div className="relative bg-graphite-light/50 backdrop-blur-sm border border-ivory/10 rounded-sm p-8 space-y-8">
+                  <div>
+                    <div className="font-heading text-5xl font-bold text-steel mb-2">10+</div>
+                    <div className="text-ivory/70 text-sm uppercase tracking-wider">Years of Excellence</div>
+                  </div>
+                  <div className="h-px bg-ivory/10" />
+                  <div>
+                    <div className="font-heading text-5xl font-bold text-steel mb-2">150+</div>
+                    <div className="text-ivory/70 text-sm uppercase tracking-wider">Projects Delivered</div>
+                  </div>
+                  <div className="h-px bg-ivory/10" />
+                  <div>
+                    <div className="font-heading text-5xl font-bold text-steel mb-2">6</div>
+                    <div className="text-ivory/70 text-sm uppercase tracking-wider">Engineering Disciplines</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Bottom accent line */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-steel to-transparent" />
       </section>
 
       {/* Stats Section */}

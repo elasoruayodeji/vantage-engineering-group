@@ -8,20 +8,25 @@ export default function About() {
     <>
       {/* Hero */}
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <img
-            src="https://images.pexels.com/photos/20430714/pexels-photo-20430714/free-photo-of-exterior-of-a-modern-office-building.jpeg?auto=compress&cs=tinysrgb&w=1800"
-            alt=""
-            className="w-full h-full object-cover"
-            aria-hidden="true"
-          />
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite via-graphite-light to-graphite" />
+          <div className="absolute inset-0 opacity-[0.03]" style={{
+            backgroundImage: `linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(212, 175, 55, 0.5) 1px, transparent 1px)`,
+            backgroundSize: '80px 80px'
+          }} />
+          <div className="absolute top-1/3 right-1/3 w-[500px] h-[500px] bg-steel/5 rounded-full blur-[100px]" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'About Us' }]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-steel mb-4 block">About Us</span>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-ivory max-w-3xl">
-              Engineering Progress.<br />Building Possibility.
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-px w-12 bg-steel" />
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-steel font-medium">About Us</span>
+            </div>
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-7xl font-bold text-ivory max-w-3xl leading-[1.05] tracking-tight">
+              Engineering Progress.<br />
+              <span className="text-steel">Building Possibility.</span>
             </h1>
           </motion.div>
         </div>

@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-graphite: #101820;
-  --color-graphite-light: #1a2530;
-  --color-ivory: #F3F2ED;
-  --color-ivory-dark: #E8E7E2;
-  --color-steel: #B7D5E5;
-  --color-steel-dark: #8FBDD4;
-  --color-structural: #6F7C85;
-  --color-structural-light: #94A0A8;
+  /* Premium Navy & Gold Palette - Billion Dollar Consultancy */
+  --color-graphite: #0A1628;
+  --color-graphite-light: #152238;
+  --color-ivory: #F8F6F3;
+  --color-ivory-dark: #EDE9E3;
+  --color-steel: #D4AF37;
+  --color-steel-dark: #C9A961;
+  --color-structural: #6B7280;
+  --color-structural-light: #9CA3AF;
   --font-heading: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
