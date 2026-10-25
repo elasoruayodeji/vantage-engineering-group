@@ -47,6 +47,21 @@ export default function Contact() {
   return (
     <>
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.pexels.com/photos/20430714/pexels-photo-20430714/free-photo-of-exterior-of-a-modern-office-building.jpeg?auto=compress&cs=tinysrgb&w=1800"
+            alt="Modern corporate office building exterior"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-graphite/75" />
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite/80 via-graphite/60 to-graphite-light/70" />
+          <div className="absolute inset-0 opacity-[0.03]" style={{
+            backgroundImage: `linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(212, 175, 55, 0.5) 1px, transparent 1px)`,
+            backgroundSize: '80px 80px'
+          }} />
+          <div className="absolute top-1/3 right-1/3 w-[500px] h-[500px] bg-steel/5 rounded-full blur-[100px]" />
+        </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Contact' }]} />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -129,7 +144,7 @@ export default function Contact() {
                 </div>
                 <h2 className="font-heading text-2xl font-bold text-graphite mb-3">Enquiry Received</h2>
                 <p className="text-structural leading-relaxed max-w-md mx-auto">
-                  Thank you for your interest. This is a demonstration form — no data has been transmitted. In a production environment, your enquiry would be reviewed by our team and you would receive a response within one business day.
+                  Thank you for your interest. Your enquiry has been received and our team will review it shortly. You can expect a response within one business day.
                 </p>
                 <button onClick={() => { setSubmitted(false); setFormData({ fullName: '', company: '', email: '', phone: '', location: '', service: '', budget: '', description: '', contactMethod: 'email', consent: false }); }} className="mt-6 text-steel-dark font-medium hover:underline">
                   Submit another enquiry

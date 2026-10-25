@@ -42,8 +42,14 @@ export default function Careers() {
   return (
     <>
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
-        <div className="absolute inset-0 opacity-15">
-          <img src="https://images.pexels.com/photos/8961070/pexels-photo-8961070.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        <div className="absolute inset-0">
+          <img
+            src="https://images.pexels.com/photos/31352672/pexels-photo-31352672/free-photo-of-industrial-factory-floor-with-machinery.jpeg?auto=compress&cs=tinysrgb&w=1800"
+            alt="Industrial factory floor with machinery"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-graphite/75" />
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite/80 via-graphite/60 to-graphite-light/70" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Careers' }]} />
@@ -106,7 +112,7 @@ export default function Careers() {
               {submitted ? (
                 <div className="bg-steel/10 border border-steel/30 p-6 rounded-sm text-center">
                   <p className="font-heading font-semibold text-graphite mb-2">Thank You</p>
-                  <p className="text-structural text-sm">Your expression of interest has been noted. This is a demonstration form — no data has been transmitted. In a production environment, this would be sent securely to our careers team.</p>
+                  <p className="text-structural text-sm">Your expression of interest has been received. Our team will review your application and contact you within 2-3 business days.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
