@@ -13,9 +13,22 @@ export default function Home() {
     <>
       {/* Hero Section - Billion Dollar Consultancy Style */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-graphite">
-        {/* Sophisticated Background */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-graphite via-graphite-light to-graphite" />
+        {/* Hero Background Image */}
+        <motion.div 
+          className="absolute inset-0"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1764449321624-913ca52646c6?auto=format&fit=crop&w=1920&q=80"
+            alt="Construction site with cranes and bridge infrastructure"
+            className="w-full h-full object-cover"
+          />
+          {/* Dark overlay for readability */}
+          <div className="absolute inset-0 bg-graphite/85" />
+          {/* Sophisticated gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite/90 via-graphite/70 to-graphite-light/80" />
           {/* Subtle geometric pattern */}
           <div className="absolute inset-0 opacity-[0.03]" style={{
             backgroundImage: `linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px),
@@ -25,7 +38,7 @@ export default function Home() {
           {/* Radial glow */}
           <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-steel/5 rounded-full blur-[120px]" />
           <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-steel/3 rounded-full blur-[100px]" />
-        </div>
+        </motion.div>
 
         {/* Content */}
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-24 lg:py-32 w-full">

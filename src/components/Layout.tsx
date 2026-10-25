@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import { SHORT_NAME, CONTACT } from '../data/content';
-import { ScrollProgress, BackToTop } from './ScrollProgress';
+import { BackToTop } from './ScrollProgress';
 import ScrollToTop from './ScrollToTop';
 
 export function Navbar() {
@@ -234,7 +234,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col">
       <ScrollToTop />
-      <ScrollProgress />
       <Navbar />
       <main className="flex-1 pt-16 lg:pt-20">
         {children}
