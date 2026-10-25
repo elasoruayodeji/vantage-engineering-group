@@ -81,8 +81,15 @@ export default function Contact() {
                   <Phone size={18} className="text-steel-dark" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-semibold text-graphite text-sm">Telephone</h3>
-                  <p className="text-structural text-sm mt-1">{CONTACT.phone}</p>
+                  <h3 className="font-heading font-semibold text-graphite text-sm">WhatsApp</h3>
+                  <a 
+                    href="https://wa.me/2348075690088" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-structural text-sm mt-1 hover:text-steel transition-colors"
+                  >
+                    {CONTACT.phone}
+                  </a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -91,8 +98,12 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="font-heading font-semibold text-graphite text-sm">Email</h3>
-                  <p className="text-structural text-sm mt-1">{CONTACT.email}</p>
-                  <p className="text-structural text-sm">{CONTACT.projects}</p>
+                  <a 
+                    href="mailto:elasoruayodeji@gmail.com"
+                    className="text-structural text-sm mt-1 hover:text-steel transition-colors block"
+                  >
+                    {CONTACT.email}
+                  </a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -106,11 +117,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="mt-8 p-4 bg-ivory-dark/50 border border-ivory-dark rounded-sm">
-              <p className="text-xs text-structural leading-relaxed">
-                <strong>Note:</strong> This is a demonstration website for a fictional company. Contact details shown are placeholders and not operational.
-              </p>
-            </div>
+
           </div>
 
           {/* Form */}
