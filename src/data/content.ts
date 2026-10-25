@@ -8,8 +8,8 @@ export const TAGLINE = 'Engineering Progress. Building Possibility.';
 export const CONTACT = {
   address: '24 Meridian Business Avenue, Victoria Island, Lagos',
   city: 'Victoria Island, Lagos State, Nigeria',
-  phone: '+234 800 000 0000',
-  email: 'enquiries@vantageengineering.example',
+  phone: '+234 807 569 0088',
+  email: 'elasoruayodeji@gmail.com',
   projects: 'projects@vantageengineering.example',
   careers: 'careers@vantageengineering.example',
   hours: 'Monday–Friday, 9:00 AM–5:00 PM WAT',

@@ -74,57 +74,101 @@ export function Navbar() {
 
           {/* Mobile menu button */}
           <button
-            className="lg:hidden text-ivory p-2"
+            className="lg:hidden relative w-10 h-10 flex items-center justify-center"
             onClick={() => setIsOpen(!isOpen)}
             aria-expanded={isOpen}
             aria-label="Toggle navigation menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            <div className="relative w-6 h-5">
+              <span 
+                className={`absolute left-0 h-0.5 w-6 bg-ivory transition-all duration-300 ease-in-out ${
+                  isOpen ? 'top-2 rotate-45' : 'top-0'
+                }`} 
+              />
+              <span 
+                className={`absolute left-0 top-2 h-0.5 w-6 bg-ivory transition-all duration-300 ease-in-out ${
+                  isOpen ? 'opacity-0' : 'opacity-100'
+                }`} 
+              />
+              <span 
+                className={`absolute left-0 h-0.5 w-6 bg-ivory transition-all duration-300 ease-in-out ${
+                  isOpen ? 'top-2 -rotate-45' : 'top-4'
+                }`} 
+              />
+            </div>
           </button>
         </div>
 
-        {/* Mobile Nav */}
+        {/* Mobile Nav - Full Screen Overlay */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden bg-graphite border-t border-white/10 overflow-hidden"
+              className="fixed inset-0 top-16 lg:top-20 bg-graphite z-40 lg:hidden overflow-y-auto"
             >
-              <div className="flex flex-col gap-1 pt-4 pb-6">
-                {navLinks.map((link, i) => (
+              <div className="max-w-7xl mx-auto px-6 py-12">
+                <nav className="flex flex-col gap-2">
+                  {navLinks.map((link, i) => (
+                    <motion.div
+                      key={link.to}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: i * 0.08 }}
+                    >
+                      <Link
+                        to={link.to}
+                        className={`block py-4 text-2xl font-heading font-semibold border-b border-white/10 transition-colors ${
+                          location.pathname.startsWith(link.to)
+                            ? 'text-steel'
+                            : 'text-ivory hover:text-steel'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  ))}
                   <motion.div
-                    key={link.to}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: i * 0.05 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: navLinks.length * 0.08 }}
+                    className="pt-8"
                   >
                     <Link
-                      to={link.to}
-                      className={`px-4 py-3 text-sm font-medium rounded transition-colors block ${
-                        location.pathname.startsWith(link.to)
-                          ? 'text-steel bg-white/5'
-                          : 'text-ivory/80 hover:text-ivory hover:bg-white/5'
-                      }`}
+                      to="/contact"
+                      className="block bg-steel text-graphite px-8 py-4 text-base font-semibold rounded-sm text-center hover:bg-steel-dark transition-colors"
                     >
-                      {link.label}
+                      Discuss a Project
                     </Link>
                   </motion.div>
-                ))}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: navLinks.length * 0.05 }}
-                >
-                  <Link
-                    to="/contact"
-                    className="mx-4 mt-4 bg-steel text-graphite px-5 py-3 text-sm font-semibold rounded text-center hover:bg-steel-dark transition-colors block"
+                  
+                  {/* Contact Info */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 0.5 }}
+                    className="mt-12 pt-8 border-t border-white/10"
                   >
-                    Discuss a Project
-                  </Link>
-                </motion.div>
+                    <a 
+                      href="https://wa.me/2348075690088" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 text-ivory/70 hover:text-steel transition-colors mb-4"
+                    >
+                      <Phone size={16} />
+                      <span className="text-sm">{CONTACT.phone}</span>
+                    </a>
+                    <a 
+                      href="mailto:elasoruayodeji@gmail.com"
+                      className="flex items-center gap-3 text-ivory/70 hover:text-steel transition-colors"
+                    >
+                      <Mail size={16} />
+                      <span className="text-sm">{CONTACT.email}</span>
+                    </a>
+                  </motion.div>
+                </nav>
               </div>
             </motion.div>
           )}
@@ -137,14 +181,7 @@ export function Navbar() {
 export function Footer() {
   return (
     <footer className="bg-graphite text-ivory/70 border-t border-white/5">
-      {/* Fictional disclaimer */}
-      <div className="bg-steel/10 border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <p className="text-xs text-ivory/50 text-center">
-            <strong>Demo Notice:</strong> VANTAGE Engineering Group is a fictional company. All project details, team members, and outcomes are illustrative only.
-          </p>
-        </div>
-      </div>
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -159,14 +196,22 @@ export function Footer() {
             <p className="text-sm leading-relaxed mb-4">
               Integrated engineering, industrial systems and infrastructure solutions designed for lasting performance.
             </p>
-            <div className="flex items-center gap-2 text-sm hover:text-steel transition-colors cursor-pointer">
+            <a 
+              href="https://wa.me/2348075690088" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm hover:text-steel transition-colors"
+            >
               <Phone size={14} className="text-steel flex-shrink-0" />
               <span>{CONTACT.phone}</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm mt-2 hover:text-steel transition-colors cursor-pointer">
+            </a>
+            <a 
+              href="mailto:elasoruayodeji@gmail.com"
+              className="flex items-center gap-2 text-sm mt-2 hover:text-steel transition-colors"
+            >
               <Mail size={14} className="text-steel flex-shrink-0" />
               <span>{CONTACT.email}</span>
-            </div>
+            </a>
           </div>
 
           {/* Services */}

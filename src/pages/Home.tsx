@@ -26,9 +26,9 @@ export default function Home() {
             className="w-full h-full object-cover"
           />
           {/* Dark overlay for readability */}
-          <div className="absolute inset-0 bg-graphite/85" />
+          <div className="absolute inset-0 bg-graphite/60" />
           {/* Sophisticated gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-graphite/90 via-graphite/70 to-graphite-light/80" />
+          <div className="absolute inset-0 bg-gradient-to-br from-graphite/70 via-graphite/50 to-graphite-light/60" />
           {/* Subtle geometric pattern */}
           <div className="absolute inset-0 opacity-[0.03]" style={{
             backgroundImage: `linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px),
