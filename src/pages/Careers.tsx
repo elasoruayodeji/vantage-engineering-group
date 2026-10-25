@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Section, SectionHeading, Breadcrumbs } from '../components/UI';
+import SEO, { createBreadcrumbSchema } from '../components/SEO';
 
 const openPositions = [
   { title: 'Senior Structural Engineer', department: 'Civil and Structural Engineering', location: 'Lagos', type: 'Full-time' },
@@ -41,6 +42,16 @@ export default function Careers() {
 
   return (
     <>
+      <SEO 
+        title="Careers"
+        description="Join VANTAGE Engineering Group. Explore career opportunities in civil, structural, MEP, industrial, and infrastructure engineering across Nigeria."
+        canonical="/careers"
+        image="https://images.pexels.com/photos/31352672/pexels-photo-31352672/free-photo-of-industrial-factory-floor-with-machinery.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        jsonLd={createBreadcrumbSchema([
+          { name: 'Home', url: '/' },
+          { name: 'Careers', url: '/careers' }
+        ])}
+      />
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0">
           <img

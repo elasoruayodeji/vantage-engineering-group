@@ -2,11 +2,22 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Section, SectionHeading, Breadcrumbs, CTASection } from '../components/UI';
+import SEO, { createBreadcrumbSchema } from '../components/SEO';
 import { methodology } from '../data/content';
 
 export default function Process() {
   return (
     <>
+      <SEO 
+        title="Our Engineering Process"
+        description="Discover VANTAGE Engineering's seven-stage methodology from discovery through handover. Our structured approach ensures quality, transparency, and lasting performance."
+        canonical="/our-process"
+        image="https://images.pexels.com/photos/9843588/pexels-photo-9843588.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        jsonLd={createBreadcrumbSchema([
+          { name: 'Home', url: '/' },
+          { name: 'Our Process', url: '/our-process' }
+        ])}
+      />
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0">
           <img

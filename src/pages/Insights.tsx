@@ -3,11 +3,22 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Clock, Calendar } from 'lucide-react';
 import { Section, SectionHeading, ArticleCard, Breadcrumbs, CTASection } from '../components/UI';
 import { ReadingProgress } from '../components/ReadingProgress';
+import SEO, { createBreadcrumbSchema } from '../components/SEO';
 import { articles, services } from '../data/content';
 
 export function InsightsList() {
   return (
     <>
+      <SEO 
+        title="Engineering Insights"
+        description="Technical articles and insights from VANTAGE Engineering on power reliability, preventive maintenance, stormwater management, and infrastructure design."
+        canonical="/insights"
+        image="https://images.pexels.com/photos/12157172/pexels-photo-12157172.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        jsonLd={createBreadcrumbSchema([
+          { name: 'Home', url: '/' },
+          { name: 'Insights', url: '/insights' }
+        ])}
+      />
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -56,6 +67,7 @@ export function InsightDetail() {
   if (!article) {
     return (
       <Section>
+        <SEO noindex />
         <div className="text-center py-20">
           <h1 className="font-heading text-2xl font-bold text-graphite mb-4">Article Not Found</h1>
           <Link to="/insights" className="text-steel-dark hover:underline">View all insights</Link>
@@ -69,6 +81,47 @@ export function InsightDetail() {
 
   return (
     <>
+      <SEO 
+        title={article.title}
+        description={article.excerpt}
+        canonical={`/insights/${article.slug}`}
+        image={article.image}
+        type="article"
+        publishedTime={article.date}
+        author={article.author}
+        jsonLd={[
+          createBreadcrumbSchema([
+            { name: 'Home', url: '/' },
+            { name: 'Insights', url: '/insights' },
+            { name: article.title, url: `/insights/${article.slug}` }
+          ]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: article.title,
+            description: article.excerpt,
+            image: article.image,
+            datePublished: article.date,
+            dateModified: article.date,
+            author: {
+              '@type': 'Organization',
+              name: article.author
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'VANTAGE Engineering Group',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://vantageengineering.example/logo.png'
+              }
+            },
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': `https://vantageengineering.example/insights/${article.slug}`
+            }
+          }
+        ]}
+      />
       <ReadingProgress />
       {/* Hero */}
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">

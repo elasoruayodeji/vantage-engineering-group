@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, MapPin, DollarSign } from 'lucide-react';
 import { Section, SectionHeading, ProjectCard, Breadcrumbs, CTASection } from '../components/UI';
+import SEO, { createBreadcrumbSchema } from '../components/SEO';
 import { projects, services } from '../data/content';
 
 const categories = ['All', 'Commercial', 'Industrial', 'Energy', 'Infrastructure', 'Residential'] as const;
@@ -16,6 +17,16 @@ export function ProjectsOverview() {
 
   return (
     <>
+      <SEO 
+        title="Project Portfolio"
+        description="Explore VANTAGE Engineering's project portfolio featuring commercial, industrial, energy, and infrastructure case studies across Nigeria and West Africa."
+        canonical="/projects"
+        image="https://images.unsplash.com/photo-1763798709709-ef54e8bad856?auto=format&fit=crop&w=1200&q=80"
+        jsonLd={createBreadcrumbSchema([
+          { name: 'Home', url: '/' },
+          { name: 'Projects', url: '/projects' }
+        ])}
+      />
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -103,6 +114,7 @@ export function ProjectDetail() {
   if (!project) {
     return (
       <Section>
+        <SEO noindex />
         <div className="text-center py-20">
           <h1 className="font-heading text-2xl font-bold text-graphite mb-4">Project Not Found</h1>
           <Link to="/projects" className="text-steel-dark hover:underline">View all projects</Link>
@@ -116,6 +128,29 @@ export function ProjectDetail() {
 
   return (
     <>
+      <SEO 
+        title={project.title}
+        description={`${project.category} engineering project in ${project.location}. ${project.scope}`}
+        canonical={`/projects/${project.slug}`}
+        image={project.image}
+        jsonLd={[
+          createBreadcrumbSchema([
+            { name: 'Home', url: '/' },
+            { name: 'Projects', url: '/projects' },
+            { name: project.title, url: `/projects/${project.slug}` }
+          ]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Project',
+            name: project.title,
+            description: project.scope,
+            location: {
+              '@type': 'Place',
+              name: project.location
+            }
+          }
+        ]}
+      />
       {/* Hero */}
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0">

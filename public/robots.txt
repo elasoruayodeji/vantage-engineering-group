@@ -1,6 +1,16 @@
+# VANTAGE Engineering Group - Robots.txt
+# https://vantageengineering.example
+
 User-agent: *
 Allow: /
+Disallow: /privacy
+Disallow: /terms
+
+# Sitemap
 Sitemap: https://vantageengineering.example/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
 
 # Note: This is a fictional demonstration website.
 # The domain vantageengineering.example uses the reserved .example TLD.
