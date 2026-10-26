@@ -63,7 +63,7 @@ Sent from VANTAGE Engineering Website`;
 
   const buildWhatsAppUrl = () => {
     const message = buildWhatsAppMessage();
-    return `https://wa.me/2348075690088?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/2348142485613?text=${encodeURIComponent(message)}`;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -75,9 +75,11 @@ Sent from VANTAGE Engineering Website`;
     }
     setErrors({});
     
-    // Open WhatsApp with pre-filled message
-    const whatsappUrl = buildWhatsAppUrl();
-    window.open(whatsappUrl, '_blank');
+    // Only open WhatsApp if phone contact method is selected
+    if (formData.contactMethod === 'phone') {
+      const whatsappUrl = buildWhatsAppUrl();
+      window.open(whatsappUrl, '_blank');
+    }
     
     setSubmitted(true);
   };
@@ -205,24 +207,38 @@ Sent from VANTAGE Engineering Website`;
                 animate={{ opacity: 1, scale: 1 }} 
                 className="bg-steel/10 border border-steel/30 p-8 rounded-sm text-center"
               >
-                <div className="w-16 h-16 bg-green-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MessageSquare size={28} className="text-green-600" />
-                </div>
-                <h2 className="font-heading text-2xl font-bold text-graphite mb-3">Enquiry Sent via WhatsApp!</h2>
-                <p className="text-structural leading-relaxed max-w-md mx-auto mb-4">
-                  Your project details have been sent to our WhatsApp. If the message didn't open automatically, please click below:
-                </p>
-                <a 
-                  href={buildWhatsAppUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-green-600 text-white px-6 py-3 rounded-sm font-medium hover:bg-green-700 transition-colors"
-                >
-                  Send via WhatsApp
-                </a>
-                <p className="text-structural text-sm mt-4">
-                  Our team will review your enquiry and respond within one business day.
-                </p>
+                {formData.contactMethod === 'phone' ? (
+                  <>
+                    <div className="w-16 h-16 bg-green-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <MessageSquare size={28} className="text-green-600" />
+                    </div>
+                    <h2 className="font-heading text-2xl font-bold text-graphite mb-3">Enquiry Sent via WhatsApp!</h2>
+                    <p className="text-structural leading-relaxed max-w-md mx-auto mb-4">
+                      Your project details have been sent to our WhatsApp. If the message didn't open automatically, please click below:
+                    </p>
+                    <a 
+                      href={buildWhatsAppUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-green-600 text-white px-6 py-3 rounded-sm font-medium hover:bg-green-700 transition-colors"
+                    >
+                      Send via WhatsApp
+                    </a>
+                    <p className="text-structural text-sm mt-4">
+                      Our team will review your enquiry and respond within one business day.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-16 h-16 bg-steel/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <MessageSquare size={28} className="text-steel-dark" />
+                    </div>
+                    <h2 className="font-heading text-2xl font-bold text-graphite mb-3">Enquiry Received!</h2>
+                    <p className="text-structural leading-relaxed max-w-md mx-auto mb-4">
+                      Thank you for your enquiry. Our team will review your project details and respond within one business day.
+                    </p>
+                  </>
+                )}
                 <button 
                   onClick={() => { 
                     setSubmitted(false); 
@@ -388,7 +404,7 @@ Sent from VANTAGE Engineering Website`;
                   type="submit" 
                   className="w-full bg-graphite text-ivory px-6 py-3.5 font-semibold rounded-sm hover:bg-graphite-light transition-colors"
                 >
-                  Submit Enquiry via WhatsApp
+                  {formData.contactMethod === 'phone' ? 'Submit Enquiry via WhatsApp' : 'Submit Enquiry'}
                 </button>
               </form>
             )}
