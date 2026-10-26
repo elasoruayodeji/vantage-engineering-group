@@ -106,53 +106,39 @@ export function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
               className="fixed inset-0 top-16 lg:top-20 bg-graphite z-40 lg:hidden overflow-y-auto"
             >
               <div className="max-w-7xl mx-auto px-6 py-12">
                 <nav className="flex flex-col gap-2">
-                  {navLinks.map((link, i) => (
-                    <motion.div
+                  {navLinks.map((link) => (
+                    <Link
                       key={link.to}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: i * 0.08 }}
+                      to={link.to}
+                      onClick={() => setIsOpen(false)}
+                      className={`block py-4 text-2xl font-heading font-semibold border-b border-white/10 transition-colors ${
+                        location.pathname.startsWith(link.to)
+                          ? 'text-steel'
+                          : 'text-ivory hover:text-steel'
+                      }`}
                     >
-                      <Link
-                        to={link.to}
-                        className={`block py-4 text-2xl font-heading font-semibold border-b border-white/10 transition-colors ${
-                          location.pathname.startsWith(link.to)
-                            ? 'text-steel'
-                            : 'text-ivory hover:text-steel'
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
+                      {link.label}
+                    </Link>
                   ))}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: navLinks.length * 0.08 }}
-                    className="pt-8"
-                  >
+                  <div className="pt-8">
                     <Link
                       to="/contact"
+                      onClick={() => setIsOpen(false)}
                       className="block bg-steel text-graphite px-8 py-4 text-base font-semibold rounded-sm text-center hover:bg-steel-dark transition-colors"
                     >
                       Discuss a Project
                     </Link>
-                  </motion.div>
+                  </div>
                   
                   {/* Contact Info */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.4, delay: 0.5 }}
-                    className="mt-12 pt-8 border-t border-white/10"
-                  >
+                  <div className="mt-12 pt-8 border-t border-white/10">
                     <a 
-                      href="https://wa.me/2348075690088" 
+                      href="https://wa.me/2348142485613" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 text-ivory/70 hover:text-steel transition-colors mb-4"
@@ -167,7 +153,7 @@ export function Navbar() {
                       <Mail size={16} />
                       <span className="text-sm">{CONTACT.email}</span>
                     </a>
-                  </motion.div>
+                  </div>
                 </nav>
               </div>
             </motion.div>

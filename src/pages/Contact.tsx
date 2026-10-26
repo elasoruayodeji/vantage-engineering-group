@@ -1,27 +1,69 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, MessageSquare } from 'lucide-react';
 import { Section, Breadcrumbs } from '../components/UI';
 import SEO, { createBreadcrumbSchema } from '../components/SEO';
 import { CONTACT, services } from '../data/content';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    fullName: '', company: '', email: '', phone: '', location: '',
-    service: '', budget: '', description: '', contactMethod: 'email', consent: false
+    fullName: '',
+    company: '',
+    email: '',
+    phone: '',
+    location: '',
+    service: '',
+    budget: '',
+    description: '',
+    contactMethod: 'email',
+    consent: false
   });
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Enter a valid email address';
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Enter a valid email address';
+    }
     if (!formData.description.trim()) newErrors.description = 'Please describe your project';
     if (!formData.consent) newErrors.consent = 'Please accept the privacy notice';
     return newErrors;
+  };
+
+  const buildWhatsAppMessage = () => {
+    const serviceName = formData.service 
+      ? formData.service === 'multiple' 
+        ? 'Multiple / Not sure'
+        : services.find(s => s.id === formData.service)?.title || formData.service
+      : 'Not specified';
+    
+    return `*New Project Enquiry*
+
+*Full Name:* ${formData.fullName}
+*Company:* ${formData.company || 'Not specified'}
+*Email:* ${formData.email}
+*Phone:* ${formData.phone || 'Not provided'}
+*Location:* ${formData.location || 'Not specified'}
+
+*Service Required:* ${serviceName}
+*Budget:* ${formData.budget || 'Not specified'}
+
+*Project Description:*
+${formData.description}
+
+*Preferred Contact:* ${formData.contactMethod}
+
+---
+Sent from VANTAGE Engineering Website`;
+  };
+
+  const buildWhatsAppUrl = () => {
+    const message = buildWhatsAppMessage();
+    return `https://wa.me/2348142485613?text=${encodeURIComponent(message)}`;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,17 +74,21 @@ export default function Contact() {
       return;
     }
     setErrors({});
-    setSubmitting(true);
-    // Simulate submission - no backend configured
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-    }, 1000);
+    
+    // Only open WhatsApp if phone contact method is selected
+    if (formData.contactMethod === 'phone') {
+      const whatsappUrl = buildWhatsAppUrl();
+      window.open(whatsappUrl, '_blank');
+    }
+    
+    setSubmitted(true);
   };
 
   const updateField = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-    if (errors[field]) setErrors(prev => ({ ...prev, [field]: '' }));
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    }
   };
 
   return (
@@ -65,6 +111,7 @@ export default function Contact() {
           }
         ]}
       />
+
       <section className="relative py-24 md:py-32 bg-graphite overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -150,22 +197,66 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-
-
           </div>
 
           {/* Form */}
           <div className="lg:col-span-2">
             {submitted ? (
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-steel/10 border border-steel/30 p-8 rounded-sm text-center">
-                <div className="w-16 h-16 bg-steel/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Mail size={28} className="text-steel-dark" />
-                </div>
-                <h2 className="font-heading text-2xl font-bold text-graphite mb-3">Enquiry Received</h2>
-                <p className="text-structural leading-relaxed max-w-md mx-auto">
-                  Thank you for your interest. Your enquiry has been received and our team will review it shortly. You can expect a response within one business day.
-                </p>
-                <button onClick={() => { setSubmitted(false); setFormData({ fullName: '', company: '', email: '', phone: '', location: '', service: '', budget: '', description: '', contactMethod: 'email', consent: false }); }} className="mt-6 text-steel-dark font-medium hover:underline">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }} 
+                animate={{ opacity: 1, scale: 1 }} 
+                className="bg-steel/10 border border-steel/30 p-8 rounded-sm text-center"
+              >
+                {formData.contactMethod === 'phone' ? (
+                  <>
+                    <div className="w-16 h-16 bg-green-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <MessageSquare size={28} className="text-green-600" />
+                    </div>
+                    <h2 className="font-heading text-2xl font-bold text-graphite mb-3">Enquiry Sent via WhatsApp!</h2>
+                    <p className="text-structural leading-relaxed max-w-md mx-auto mb-4">
+                      Your project details have been sent to our WhatsApp. If the message didn't open automatically, please click below:
+                    </p>
+                    <a 
+                      href={buildWhatsAppUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-green-600 text-white px-6 py-3 rounded-sm font-medium hover:bg-green-700 transition-colors"
+                    >
+                      Send via WhatsApp
+                    </a>
+                    <p className="text-structural text-sm mt-4">
+                      Our team will review your enquiry and respond within one business day.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-16 h-16 bg-steel/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <MessageSquare size={28} className="text-steel-dark" />
+                    </div>
+                    <h2 className="font-heading text-2xl font-bold text-graphite mb-3">Enquiry Received!</h2>
+                    <p className="text-structural leading-relaxed max-w-md mx-auto mb-4">
+                      Thank you for your enquiry. Our team will review your project details and respond within one business day.
+                    </p>
+                  </>
+                )}
+                <button 
+                  onClick={() => { 
+                    setSubmitted(false); 
+                    setFormData({ 
+                      fullName: '', 
+                      company: '', 
+                      email: '', 
+                      phone: '', 
+                      location: '', 
+                      service: '', 
+                      budget: '', 
+                      description: '', 
+                      contactMethod: 'email', 
+                      consent: false 
+                    }); 
+                  }} 
+                  className="mt-6 text-steel-dark font-medium hover:underline text-sm"
+                >
                   Submit another enquiry
                 </button>
               </motion.div>
@@ -174,42 +265,88 @@ export default function Contact() {
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="contact-name" className="block text-sm font-medium text-graphite mb-1">Full Name *</label>
-                    <input id="contact-name" type="text" value={formData.fullName} onChange={e => updateField('fullName', e.target.value)} className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none" aria-invalid={!!errors.fullName} />
+                    <input 
+                      id="contact-name" 
+                      type="text" 
+                      value={formData.fullName} 
+                      onChange={e => updateField('fullName', e.target.value)} 
+                      className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none" 
+                      aria-invalid={!!errors.fullName} 
+                    />
                     {errors.fullName && <p className="text-red-600 text-xs mt-1" role="alert">{errors.fullName}</p>}
                   </div>
                   <div>
                     <label htmlFor="contact-company" className="block text-sm font-medium text-graphite mb-1">Company Name</label>
-                    <input id="contact-company" type="text" value={formData.company} onChange={e => updateField('company', e.target.value)} className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none" />
+                    <input 
+                      id="contact-company" 
+                      type="text" 
+                      value={formData.company} 
+                      onChange={e => updateField('company', e.target.value)} 
+                      className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none" 
+                    />
                   </div>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="contact-email" className="block text-sm font-medium text-graphite mb-1">Business Email *</label>
-                    <input id="contact-email" type="email" value={formData.email} onChange={e => updateField('email', e.target.value)} className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none" aria-invalid={!!errors.email} />
+                    <input 
+                      id="contact-email" 
+                      type="email" 
+                      value={formData.email} 
+                      onChange={e => updateField('email', e.target.value)} 
+                      className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none" 
+                      aria-invalid={!!errors.email} 
+                    />
                     {errors.email && <p className="text-red-600 text-xs mt-1" role="alert">{errors.email}</p>}
                   </div>
                   <div>
                     <label htmlFor="contact-phone" className="block text-sm font-medium text-graphite mb-1">Telephone (with country code)</label>
-                    <input id="contact-phone" type="tel" value={formData.phone} onChange={e => updateField('phone', e.target.value)} className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none" placeholder="+234..." />
+                    <input 
+                      id="contact-phone" 
+                      type="tel" 
+                      value={formData.phone} 
+                      onChange={e => updateField('phone', e.target.value)} 
+                      className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none" 
+                      placeholder="+234..." 
+                    />
                   </div>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="contact-location" className="block text-sm font-medium text-graphite mb-1">Project Location</label>
-                    <input id="contact-location" type="text" value={formData.location} onChange={e => updateField('location', e.target.value)} className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none" placeholder="City, State" />
+                    <input 
+                      id="contact-location" 
+                      type="text" 
+                      value={formData.location} 
+                      onChange={e => updateField('location', e.target.value)} 
+                      className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none" 
+                      placeholder="City, State" 
+                    />
                   </div>
                   <div>
                     <label htmlFor="contact-service" className="block text-sm font-medium text-graphite mb-1">Service Required</label>
-                    <select id="contact-service" value={formData.service} onChange={e => updateField('service', e.target.value)} className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none">
+                    <select 
+                      id="contact-service" 
+                      value={formData.service} 
+                      onChange={e => updateField('service', e.target.value)} 
+                      className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none"
+                    >
                       <option value="">Select a service</option>
-                      {services.map(s => <option key={s.id} value={s.id}>{s.title}</option>)}
+                      {services.map(s => (
+                        <option key={s.id} value={s.id}>{s.title}</option>
+                      ))}
                       <option value="multiple">Multiple / Not sure</option>
                     </select>
                   </div>
                 </div>
                 <div>
                   <label htmlFor="contact-budget" className="block text-sm font-medium text-graphite mb-1">Approximate Project Budget (optional)</label>
-                  <select id="contact-budget" value={formData.budget} onChange={e => updateField('budget', e.target.value)} className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none">
+                  <select 
+                    id="contact-budget" 
+                    value={formData.budget} 
+                    onChange={e => updateField('budget', e.target.value)} 
+                    className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none"
+                  >
                     <option value="">Prefer not to say</option>
                     <option value="under-100m">Under ₦100 million</option>
                     <option value="100m-500m">₦100 million – ₦500 million</option>
@@ -219,15 +356,30 @@ export default function Contact() {
                 </div>
                 <div>
                   <label htmlFor="contact-description" className="block text-sm font-medium text-graphite mb-1">Project Description *</label>
-                  <textarea id="contact-description" rows={5} value={formData.description} onChange={e => updateField('description', e.target.value)} className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none resize-none" placeholder="Describe your project requirements, timeline, and any specific challenges..." aria-invalid={!!errors.description} />
+                  <textarea 
+                    id="contact-description" 
+                    rows={5} 
+                    value={formData.description} 
+                    onChange={e => updateField('description', e.target.value)} 
+                    className="w-full px-4 py-2.5 border border-ivory-dark rounded-sm text-sm focus:border-steel focus:outline-none resize-none" 
+                    placeholder="Describe your project requirements, timeline, and any specific challenges..."
+                    aria-invalid={!!errors.description}
+                  />
                   {errors.description && <p className="text-red-600 text-xs mt-1" role="alert">{errors.description}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-graphite mb-2">Preferred Contact Method</label>
                   <div className="flex gap-4">
-                    {['email', 'phone', 'either'].map(method => (
+                    {['email', 'phone', 'whatsapp'].map(method => (
                       <label key={method} className="flex items-center gap-2 cursor-pointer">
-                        <input type="radio" name="contactMethod" value={method} checked={formData.contactMethod === method} onChange={e => updateField('contactMethod', e.target.value)} className="text-steel focus:ring-steel" />
+                        <input 
+                          type="radio" 
+                          name="contactMethod" 
+                          value={method} 
+                          checked={formData.contactMethod === method} 
+                          onChange={e => updateField('contactMethod', e.target.value)} 
+                          className="text-steel focus:ring-steel" 
+                        />
                         <span className="text-sm text-structural capitalize">{method}</span>
                       </label>
                     ))}
@@ -235,13 +387,24 @@ export default function Contact() {
                 </div>
                 <div>
                   <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" checked={formData.consent} onChange={e => updateField('consent', e.target.checked)} className="mt-1 text-steel focus:ring-steel" aria-invalid={!!errors.consent} />
-                    <span className="text-sm text-structural">I consent to VANTAGE Engineering processing my data for the purpose of responding to this enquiry, in accordance with the <a href="/privacy" className="text-steel-dark underline">Privacy Policy</a>. *</span>
+                    <input 
+                      type="checkbox" 
+                      checked={formData.consent} 
+                      onChange={e => updateField('consent', e.target.checked)} 
+                      className="mt-1 text-steel focus:ring-steel" 
+                      aria-invalid={!!errors.consent}
+                    />
+                    <span className="text-sm text-structural">
+                      I consent to VANTAGE Engineering processing my data for the purpose of responding to this enquiry, in accordance with the <a href="/privacy" className="text-steel-dark underline">Privacy Policy</a>. *
+                    </span>
                   </label>
                   {errors.consent && <p className="text-red-600 text-xs mt-1" role="alert">{errors.consent}</p>}
                 </div>
-                <button type="submit" disabled={submitting} className="w-full bg-graphite text-ivory px-6 py-3.5 font-semibold rounded-sm hover:bg-graphite-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                  {submitting ? 'Submitting...' : 'Submit Enquiry'}
+                <button 
+                  type="submit" 
+                  className="w-full bg-graphite text-ivory px-6 py-3.5 font-semibold rounded-sm hover:bg-graphite-light transition-colors"
+                >
+                  {formData.contactMethod === 'phone' ? 'Submit Enquiry via WhatsApp' : 'Submit Enquiry'}
                 </button>
               </form>
             )}
