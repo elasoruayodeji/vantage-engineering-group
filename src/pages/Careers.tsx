@@ -28,6 +28,24 @@ export default function Careers() {
     return newErrors;
   };
 
+  const buildWhatsAppUrl = () => {
+    const message = `*New Job Application*
+
+*Name:* ${formData.name}
+*Email:* ${formData.email}
+*Phone:* ${formData.phone || 'Not provided'}
+*Position:* ${formData.position}
+*Experience:* ${formData.experience || 'Not specified'}
+
+*Why VANTAGE:*
+${formData.message}
+
+---
+Sent from VANTAGE Engineering Careers Page`;
+
+    return `https://wa.me/2348075690088?text=${encodeURIComponent(message)}`;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors = validate();
@@ -36,7 +54,11 @@ export default function Careers() {
       return;
     }
     setErrors({});
-    // No backend configured - show demo state
+    
+    // Open WhatsApp with pre-filled message
+    const whatsappUrl = buildWhatsAppUrl();
+    window.open(whatsappUrl, '_blank');
+    
     setSubmitted(true);
   };
 
@@ -122,8 +144,17 @@ export default function Careers() {
 
               {submitted ? (
                 <div className="bg-steel/10 border border-steel/30 p-6 rounded-sm text-center">
-                  <p className="font-heading font-semibold text-graphite mb-2">Thank You</p>
-                  <p className="text-structural text-sm">Your expression of interest has been received. Our team will review your application and contact you within 2-3 business days.</p>
+                  <p className="font-heading font-semibold text-graphite mb-2">Application Sent!</p>
+                  <p className="text-structural text-sm mb-3">Your application has been sent via WhatsApp. If the message didn't open automatically, please click below:</p>
+                  <a 
+                    href={buildWhatsAppUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-green-600 text-white px-6 py-2 rounded-sm text-sm font-medium hover:bg-green-700 transition-colors"
+                  >
+                    Send via WhatsApp
+                  </a>
+                  <p className="text-structural text-xs mt-4">Our team will review your application and contact you within 2-3 business days.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
